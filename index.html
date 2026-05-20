@@ -108,8 +108,20 @@
         </div>
     </div>
 
+    <style>
+        .scrollbar-hide::-webkit-scrollbar {
+            display: none !important;
+            width: 0 !important;
+            height: 0 !important;
+        }
+        .scrollbar-hide {
+            -ms-overflow-style: none !important;  
+            scrollbar-width: none !important;  
+        }
+    </style>
+
     <div id="modalEdit" class="fixed inset-0 bg-black/50 backdrop-blur-sm hidden items-center justify-center p-4 z-50">
-        <div class="bg-white w-full max-w-lg p-6 rounded-2xl shadow-2xl border border-gray-100 max-h-[90vh] overflow-y-auto">
+        <div class="bg-white w-full max-w-lg p-6 rounded-2xl shadow-2xl border border-gray-100 max-h-[90vh] overflow-y-auto scrollbar-hide">
             <div class="flex justify-between items-center mb-6">
                 <h2 class="text-xl font-bold text-gray-800">Kelola Data Profil</h2>
                 <button id="btnTutupEdit" class="text-gray-400 hover:text-gray-600 text-2xl cursor-pointer">&times;</button>
