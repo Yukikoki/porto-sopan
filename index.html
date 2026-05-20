@@ -6,38 +6,10 @@
     <title>Portofolio & CV Online</title>
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-    <style>
-        body {
-            background-image: url('https://replicate.delivery/pbxt/JRrX77Zg1WvH9pL7S4rT54zM7JmPzM7JmPzM7JmPzM7JmPzM7J/output.png');
-            background-size: cover;          
-            background-position: center;     
-            background-repeat: no-repeat;    
-            background-attachment: fixed;    
-        }
-
-        body::before {
-            content: "";
-            position: fixed;
-            inset: 0;
-            background-color: rgba(255, 255, 255, 0.85); /* Lapisan putih agar teks tetap tajam dibaca */
-            z-index: -1; 
-        }
-
-        /* Menyembunyikan scrollbar kaku di modal agar sudut tetap rounded rounded-2xl */
-        .scrollbar-hide::-webkit-scrollbar {
-            display: none !important;
-            width: 0 !important;
-            height: 0 !important;
-        }
-        .scrollbar-hide {
-            -ms-overflow-style: none !important;  
-            scrollbar-width: none !important;  
-        }
-    </style>
 </head>
-<body class="min-h-screen text-gray-800 relative font-sans">
+<body class="bg-gray-100 min-h-screen text-gray-800 relative">
 
-    <div id="adminNavbar" class="bg-gray-900/90 backdrop-blur-sm text-white px-6 py-3 hidden justify-between items-center shadow-md">
+    <div id="adminNavbar" class="bg-gray-900 text-white px-6 py-3 hidden justify-between items-center shadow-md">
         <span class="text-sm font-medium text-gray-300">Mode Admin Aktif</span>
         <button id="btnLogout" class="bg-red-600 hover:bg-red-700 text-white text-xs font-bold py-1.5 px-4 rounded-lg transition cursor-pointer">
             Logout
@@ -46,7 +18,7 @@
 
     <div class="max-w-4xl mx-auto py-10 px-4 space-y-6">
         
-        <div class="bg-white/80 backdrop-blur-md rounded-2xl shadow-lg p-6 md:p-8 border border-gray-100/50">
+        <div class="bg-white rounded-2xl shadow-sm p-6 md:p-8 border border-gray-100">
             <div class="flex flex-col md:flex-row items-center gap-6">
                 <div class="w-32 h-32 rounded-full overflow-hidden bg-gray-200 border-4 border-blue-500/20 flex-shrink-0 shadow-inner">
                     <img id="display-photo" src="" alt="Foto Profil" class="w-full h-full object-cover">
@@ -56,10 +28,10 @@
                     <h1 id="display-name" class="text-2xl md:text-3xl font-bold text-gray-900">Memuat nama...</h1>
                     
                     <div class="flex flex-wrap justify-center md:justify-start gap-4 text-sm text-gray-600 pt-1">
-                        <span class="flex items-center gap-1.5 bg-white/90 px-3 py-1.5 rounded-lg border border-gray-100">
+                        <span class="flex items-center gap-1.5 bg-gray-50 px-3 py-1.5 rounded-lg border border-gray-100">
                             Tanggal Lahir: <span id="display-birthdate">-</span>
                         </span>
-                        <span class="flex items-center gap-1.5 bg-white/90 px-3 py-1.5 rounded-lg border border-gray-100">
+                        <span class="flex items-center gap-1.5 bg-gray-50 px-3 py-1.5 rounded-lg border border-gray-100">
                             Jenis Kelamin: <span id="display-gender">-</span>
                         </span>
                     </div>
@@ -67,7 +39,7 @@
             </div>
         </div>
 
-        <div class="bg-white/80 backdrop-blur-md rounded-2xl shadow-lg p-6 md:p-8 border border-gray-100/50">
+        <div class="bg-white rounded-2xl shadow-sm p-6 md:p-8 border border-gray-100">
             <h2 class="text-lg font-bold text-gray-900 border-b border-gray-100 pb-3 mb-4">
                 Tentang Saya
             </h2>
@@ -77,7 +49,7 @@
         </div>
 
         <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <div class="bg-white/80 backdrop-blur-md rounded-2xl shadow-lg p-6 border border-gray-100/50 flex flex-col">
+            <div class="bg-white rounded-2xl shadow-sm p-6 border border-gray-100 flex flex-col">
                 <h2 class="text-lg font-bold text-gray-900 border-b border-gray-100 pb-3 mb-4">
                     Pengalaman Kerja
                 </h2>
@@ -86,7 +58,7 @@
                 </p>
             </div>
 
-            <div class="bg-white/80 backdrop-blur-md rounded-2xl shadow-lg p-6 border border-gray-100/50 flex flex-col">
+            <div class="bg-white rounded-2xl shadow-sm p-6 border border-gray-100 flex flex-col">
                 <h2 class="text-lg font-bold text-gray-900 border-b border-gray-100 pb-3 mb-4">
                     Pendidikan
                 </h2>
@@ -95,7 +67,7 @@
                 </p>
             </div>
 
-            <div class="bg-white/80 backdrop-blur-md rounded-2xl shadow-lg p-6 border border-gray-100/50 flex flex-col">
+            <div class="bg-white rounded-2xl shadow-sm p-6 border border-gray-100 flex flex-col">
                 <h2 class="text-lg font-bold text-gray-900 border-b border-gray-100 pb-3 mb-4">
                     Skill & Keahlian
                 </h2>
@@ -135,6 +107,18 @@
             </form>
         </div>
     </div>
+
+    <style>
+        .scrollbar-hide::-webkit-scrollbar {
+            display: none !important;
+            width: 0 !important;
+            height: 0 !important;
+        }
+        .scrollbar-hide {
+            -ms-overflow-style: none !important;  
+            scrollbar-width: none !important;  
+        }
+    </style>
 
     <div id="modalEdit" class="fixed inset-0 bg-black/50 backdrop-blur-sm hidden items-center justify-center p-4 z-50">
         <div class="bg-white w-full max-w-lg p-6 rounded-2xl shadow-2xl border border-gray-100 max-h-[90vh] overflow-y-auto scrollbar-hide">
@@ -202,6 +186,7 @@
         
         const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
+        // Referensi DOM
         const modalLogin = document.getElementById('modalLogin');
         const modalEdit = document.getElementById('modalEdit');
         const adminNavbar = document.getElementById('adminNavbar');
@@ -209,17 +194,20 @@
         const btnBukaLogin = document.getElementById('btnBukaLogin');
         const btnSimpan = document.getElementById('btnSimpan');
 
+        // Navigasi Tombol Pop-up
         btnBukaLogin.addEventListener('click', () => modalLogin.classList.replace('hidden', 'flex'));
         document.getElementById('btnTutupLogin').addEventListener('click', () => modalLogin.classList.replace('flex', 'hidden'));
         btnBukaEdit.addEventListener('click', () => modalEdit.classList.replace('hidden', 'flex'));
         document.getElementById('btnTutupEdit').addEventListener('click', () => modalEdit.classList.replace('flex', 'hidden'));
 
+        // Format Tanggal
         function formatTanggal(stringTanggal) {
             if (!stringTanggal) return '-';
             const opsi = { year: 'numeric', month: 'long', day: 'numeric' };
             return new Date(stringTanggal).toLocaleDateString('id-ID', opsi);
         }
 
+        // Cek Status Sesi Login
         async function cekStatusLogin() {
             const { data: { session } } = await supabaseClient.auth.getSession();
             if (session) {
@@ -233,6 +221,7 @@
             }
         }
 
+        // Proses Login
         document.getElementById('formLogin').addEventListener('submit', async (e) => {
             e.preventDefault();
             const email = document.getElementById('loginEmail').value;
@@ -246,7 +235,7 @@
             if (error) {
                 alert('Login Gagal: ' + error.message);
             } else {
-                alert('Berhasil masuk.');
+                alert('Berhasil masuk sebagai admin.');
                 modalLogin.classList.replace('flex', 'hidden');
                 formLogin.reset();
                 cekStatusLogin();
@@ -254,12 +243,14 @@
             btnSubmit.innerText = "Masuk";
         });
 
+        // Proses Logout
         document.getElementById('btnLogout').addEventListener('click', async () => {
             await supabaseClient.auth.signOut();
-            alert('Berhasil keluar.');
+            alert('Berhasil keluar dari mode admin.');
             cekStatusLogin();
         });
 
+        // Ambil Data Utama Profil & 3 Card
         async function loadProfilClient() {
             try {
                 const { data, error } = await supabaseClient
@@ -269,12 +260,14 @@
                     .single();
 
                 if (data) {
+                    // Update Konten Tampilan Luar
                     document.getElementById('display-name').innerText = data.name || 'Belum diatur';
                     document.getElementById('display-birthdate').innerText = formatTanggal(data.birth_date);
                     document.getElementById('display-gender').innerText = data.gender || '-';
-                    document.getElementById('display-about').innerText = data.about_me || 'Belum ada deskripsi.';
+                    document.getElementById('display-about').innerText = data.about_me || 'Belum ada deskripsi tentang saya.';
                     
-                    document.getElementById('display-experience').innerText = data.experience || 'Belum ada data pengalaman.';
+                    // Isi data 3 card baru
+                    document.getElementById('display-experience').innerText = data.experience || 'Belum ada data pengalaman kerja.';
                     document.getElementById('display-education').innerText = data.education || 'Belum ada data pendidikan.';
                     document.getElementById('display-skills').innerText = data.skills || 'Belum ada data keahlian.';
                     
@@ -284,6 +277,7 @@
                         document.getElementById('display-photo').src = "https://api.dicebear.com/7.x/initials/svg?seed=" + encodeURIComponent(data.name || 'User');
                     }
 
+                    // Sinkronkan ke input field edit form modal
                     document.getElementById('name').value = data.name || '';
                     document.getElementById('birth_date').value = data.birth_date || '';
                     document.getElementById('gender').value = data.gender || 'Laki-laki';
@@ -293,7 +287,7 @@
                     document.getElementById('skills').value = data.skills || '';
                 }
             } catch (err) {
-                console.error('Error:', err);
+                console.error('Error load profil:', err);
             }
         }
 
@@ -302,9 +296,10 @@
             await cekStatusLogin();
         };
 
+        // Simpan Perubahan Seluruh Data CV
         document.getElementById('formCV').addEventListener('submit', async (e) => {
             e.preventDefault();
-            btnSimpan.innerText = "Menyimpan...";
+            btnSimpan.innerText = "Sedang Menyimpan...";
             btnSimpan.disabled = true;
 
             const name = document.getElementById('name').value;
@@ -325,7 +320,7 @@
                     .upload(namaFile, photoFile);
 
                 if (uploadError) {
-                    alert('Gagal upload: ' + uploadError.message);
+                    alert('Gagal upload foto: ' + uploadError.message);
                     btnSimpan.innerText = "Simpan Perubahan";
                     btnSimpan.disabled = false;
                     return;
@@ -335,18 +330,25 @@
                 photoUrl = urlData.publicUrl;
             }
 
+            // Gabungkan semua data teks untuk di-upsert ke baris ID = 1
             const dataData = { 
-                id: 1, name, birth_date: birthDate, gender, about_me: aboutMe,
-                experience, education, skills
+                id: 1, 
+                name, 
+                birth_date: birthDate, 
+                gender, 
+                about_me: aboutMe,
+                experience,
+                education,
+                skills
             };
             if (photoUrl) dataData.photo_url = photoUrl;
 
             const { error: dbError } = await supabaseClient.from('profile').upsert(dataData);
 
             if (dbError) {
-                alert('Gagal menyimpan: ' + dbError.message);
+                alert('Gagal menyimpan data: ' + dbError.message);
             } else {
-                alert('Berhasil diperbarui.');
+                alert('Portofolio berhasil diperbarui.');
                 modalEdit.classList.replace('flex', 'hidden');
                 loadProfilClient();
             }
