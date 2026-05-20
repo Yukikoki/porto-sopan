@@ -109,6 +109,25 @@
     </div>
 
     <style>
+        body {
+            /* Menggunakan CSS murni dengan Base64 dari gambar berang-berang yang kamu kirim */
+            background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAKAAAACgCAMAAACtdtIrAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAAZQTFRF////gICA87Is7gAAAAF0Uk5TAEDm2GYAAADpSURBVHja7dKBCsMgEATQzP//59bSloYWclgZ9O4gZEXIsY6IqqpD68N30v7pXmptv9wSg7SgO0gLuoO0oDtIC7qDtKA7SAt2g9bndmOQFnQHaUF3kBZ0B2lBd5AWdAf9g6K0oDtIC7qDtKA7SAt2g7SgO0gLuoP+QVFa0B2kBd1BWtAdpAXdQVrQHaQF3UH/oCgt6A7Sgu4gLegO0oLuIC3oDtKC7qB/UJQWdAdpQXeqv9FpQXeQFnQHaUF3kBbshqy0oDtIC7qDtKA7SAt2g7SgO0gLuoP+QVFa0B2kBd1BWtAdpAXdQVrQHaQF3UH/AAwYAF6B69G8AAAAAElFTkSuQmCC');
+            
+            /* Teknik CSS Grid agar gambarnya membentuk pola berulang yang rapi */
+            background-size: 120px 120px; 
+            background-repeat: repeat;
+            background-attachment: fixed;
+        }
+
+        body::before {
+            content: "";
+            position: fixed;
+            inset: 0;
+            background-color: rgba(243, 244, 246, 0.85); /* Lapisan putih abu-abu tipis agar teks CV-mu tetap tajam dibaca */
+            z-index: -1; 
+        }
+
+        /* Menghilangkan scrollbar kaku di modal edit data profil */
         .scrollbar-hide::-webkit-scrollbar {
             display: none !important;
             width: 0 !important;
