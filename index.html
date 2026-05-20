@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="id">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,36 +7,31 @@
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 </head>
-
 <body class="bg-gray-100 min-h-screen text-gray-800 relative">
 
     <div id="adminNavbar" class="bg-gray-900 text-white px-6 py-3 hidden justify-between items-center shadow-md">
         <span class="text-sm font-medium text-gray-300">Mode Admin Aktif</span>
-        <button id="btnLogout"
-            class="bg-red-600 hover:bg-red-700 text-white text-xs font-bold py-1.5 px-4 rounded-lg transition cursor-pointer">
+        <button id="btnLogout" class="bg-red-600 hover:bg-red-700 text-white text-xs font-bold py-1.5 px-4 rounded-lg transition cursor-pointer">
             Logout
         </button>
     </div>
 
-    <div class="max-w-4xl mx-auto py-10 px-4">
-
-        <div class="bg-white rounded-2xl shadow-sm p-6 md:p-8 border border-gray-100 mb-6">
+    <div class="max-w-4xl mx-auto py-10 px-4 space-y-6">
+        
+        <div class="bg-white rounded-2xl shadow-sm p-6 md:p-8 border border-gray-100">
             <div class="flex flex-col md:flex-row items-center gap-6">
-                <div
-                    class="w-32 h-32 rounded-full overflow-hidden bg-gray-200 border-4 border-blue-500/20 flex-shrink-0 shadow-inner">
+                <div class="w-32 h-32 rounded-full overflow-hidden bg-gray-200 border-4 border-blue-500/20 flex-shrink-0 shadow-inner">
                     <img id="display-photo" src="" alt="Foto Profil" class="w-full h-full object-cover">
                 </div>
-
+                
                 <div class="text-center md:text-left space-y-2 w-full">
                     <h1 id="display-name" class="text-2xl md:text-3xl font-bold text-gray-900">Memuat nama...</h1>
-
+                    
                     <div class="flex flex-wrap justify-center md:justify-start gap-4 text-sm text-gray-600 pt-1">
-                        <span
-                            class="flex items-center gap-1.5 bg-gray-50 px-3 py-1.5 rounded-lg border border-gray-100">
+                        <span class="flex items-center gap-1.5 bg-gray-50 px-3 py-1.5 rounded-lg border border-gray-100">
                             Tanggal Lahir: <span id="display-birthdate">-</span>
                         </span>
-                        <span
-                            class="flex items-center gap-1.5 bg-gray-50 px-3 py-1.5 rounded-lg border border-gray-100">
+                        <span class="flex items-center gap-1.5 bg-gray-50 px-3 py-1.5 rounded-lg border border-gray-100">
                             Jenis Kelamin: <span id="display-gender">-</span>
                         </span>
                     </div>
@@ -46,22 +40,49 @@
         </div>
 
         <div class="bg-white rounded-2xl shadow-sm p-6 md:p-8 border border-gray-100">
-            <h2 class="text-lg font-bold text-gray-900 border-b border-gray-100 pb-3 mb-4 flex items-center gap-2">
+            <h2 class="text-lg font-bold text-gray-900 border-b border-gray-100 pb-3 mb-4">
                 Tentang Saya
             </h2>
             <p id="display-about" class="text-gray-600 leading-relaxed whitespace-pre-line">
                 Sedang memuat informasi profil...
             </p>
         </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div class="bg-white rounded-2xl shadow-sm p-6 border border-gray-100 flex flex-col">
+                <h2 class="text-lg font-bold text-gray-900 border-b border-gray-100 pb-3 mb-4">
+                    Pengalaman Kerja
+                </h2>
+                <p id="display-experience" class="text-sm text-gray-600 leading-relaxed whitespace-pre-line flex-1">
+                    Belum ada data pengalaman kerja.
+                </p>
+            </div>
+
+            <div class="bg-white rounded-2xl shadow-sm p-6 border border-gray-100 flex flex-col">
+                <h2 class="text-lg font-bold text-gray-900 border-b border-gray-100 pb-3 mb-4">
+                    Pendidikan
+                </h2>
+                <p id="display-education" class="text-sm text-gray-600 leading-relaxed whitespace-pre-line flex-1">
+                    Belum ada data pendidikan.
+                </p>
+            </div>
+
+            <div class="bg-white rounded-2xl shadow-sm p-6 border border-gray-100 flex flex-col">
+                <h2 class="text-lg font-bold text-gray-900 border-b border-gray-100 pb-3 mb-4">
+                    Skill & Keahlian
+                </h2>
+                <p id="display-skills" class="text-sm text-gray-600 leading-relaxed whitespace-pre-line flex-1">
+                    Belum ada data keahlian.
+                </p>
+            </div>
+        </div>
     </div>
 
-    <button id="btnBukaLogin"
-        class="fixed bottom-6 left-6 text-gray-400 hover:text-gray-600 text-xs bg-white/80 backdrop-blur-sm py-1.5 px-3 rounded-lg shadow-sm border border-gray-200 transition cursor-pointer">
-        Login
+    <button id="btnBukaLogin" class="fixed bottom-6 left-6 text-gray-400 hover:text-gray-600 text-xs bg-white/80 backdrop-blur-sm py-1.5 px-3 rounded-lg shadow-sm border border-gray-200 transition cursor-pointer">
+        Login Admin
     </button>
 
-    <button id="btnBukaEdit"
-        class="fixed bottom-6 right-6 bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2.5 px-5 rounded-full shadow-lg transition duration-200 z-40 cursor-pointer hidden">
+    <button id="btnBukaEdit" class="fixed bottom-6 right-6 bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2.5 px-5 rounded-full shadow-lg transition duration-200 z-40 cursor-pointer hidden">
         Edit Data CV
     </button>
 
@@ -69,24 +90,18 @@
         <div class="bg-white w-full max-w-sm p-6 rounded-2xl shadow-2xl border border-gray-100">
             <div class="flex justify-between items-center mb-4">
                 <h2 class="text-lg font-bold text-gray-800">Login Pemilik Portofolio</h2>
-                <button id="btnTutupLogin"
-                    class="text-gray-400 hover:text-gray-600 text-2xl cursor-pointer">&times;</button>
+                <button id="btnTutupLogin" class="text-gray-400 hover:text-gray-600 text-2xl cursor-pointer">&times;</button>
             </div>
             <form id="formLogin" class="space-y-4">
                 <div>
                     <label class="block text-sm font-semibold text-gray-600 mb-1">Email</label>
-                    <input type="email" id="loginEmail"
-                        class="w-full border border-gray-300 rounded-lg p-2.5 outline-none focus:ring-2 focus:ring-blue-500"
-                        required placeholder="email@domain.com">
+                    <input type="email" id="loginEmail" class="w-full border border-gray-300 rounded-lg p-2.5 outline-none focus:ring-2 focus:ring-blue-500" required placeholder="email@domain.com">
                 </div>
                 <div>
                     <label class="block text-sm font-semibold text-gray-600 mb-1">Password</label>
-                    <input type="password" id="loginPassword"
-                        class="w-full border border-gray-300 rounded-lg p-2.5 outline-none focus:ring-2 focus:ring-blue-500"
-                        required placeholder="******">
+                    <input type="password" id="loginPassword" class="w-full border border-gray-300 rounded-lg p-2.5 outline-none focus:ring-2 focus:ring-blue-500" required placeholder="******">
                 </div>
-                <button type="submit" id="btnLoginSubmit"
-                    class="w-full bg-gray-800 hover:bg-gray-950 text-white font-bold py-2.5 px-4 rounded-lg transition cursor-pointer">
+                <button type="submit" id="btnLoginSubmit" class="w-full bg-gray-800 hover:bg-gray-950 text-white font-bold py-2.5 px-4 rounded-lg transition cursor-pointer">
                     Masuk
                 </button>
             </form>
@@ -94,34 +109,26 @@
     </div>
 
     <div id="modalEdit" class="fixed inset-0 bg-black/50 backdrop-blur-sm hidden items-center justify-center p-4 z-50">
-        <div
-            class="bg-white w-full max-w-lg p-6 rounded-2xl shadow-2xl border border-gray-100 max-h-[90vh] overflow-y-auto">
+        <div class="bg-white w-full max-w-lg p-6 rounded-2xl shadow-2xl border border-gray-100 max-h-[90vh] overflow-y-auto">
             <div class="flex justify-between items-center mb-6">
                 <h2 class="text-xl font-bold text-gray-800">Kelola Data Profil</h2>
-                <button id="btnTutupEdit"
-                    class="text-gray-400 hover:text-gray-600 text-2xl cursor-pointer">&times;</button>
+                <button id="btnTutupEdit" class="text-gray-400 hover:text-gray-600 text-2xl cursor-pointer">&times;</button>
             </div>
-
+            
             <form id="formCV" class="space-y-4">
                 <div>
                     <label class="block text-sm font-semibold text-gray-600 mb-1">Nama Lengkap</label>
-                    <input type="text" id="name"
-                        class="w-full border border-gray-300 rounded-lg p-2.5 focus:ring-2 focus:ring-blue-500 outline-none"
-                        required>
+                    <input type="text" id="name" class="w-full border border-gray-300 rounded-lg p-2.5 focus:ring-2 focus:ring-blue-500 outline-none" required>
                 </div>
 
                 <div class="grid grid-cols-2 gap-4">
                     <div>
                         <label class="block text-sm font-semibold text-gray-600 mb-1">Tanggal Lahir</label>
-                        <input type="date" id="birth_date"
-                            class="w-full border border-gray-300 rounded-lg p-2.5 focus:ring-2 focus:ring-blue-500 outline-none"
-                            required>
+                        <input type="date" id="birth_date" class="w-full border border-gray-300 rounded-lg p-2.5 focus:ring-2 focus:ring-blue-500 outline-none" required>
                     </div>
                     <div>
                         <label class="block text-sm font-semibold text-gray-600 mb-1">Jenis Kelamin</label>
-                        <select id="gender"
-                            class="w-full border border-gray-300 rounded-lg p-2.5 focus:ring-2 focus:ring-blue-500 outline-none"
-                            required>
+                        <select id="gender" class="w-full border border-gray-300 rounded-lg p-2.5 focus:ring-2 focus:ring-blue-500 outline-none" required>
                             <option value="Laki-laki">Laki-laki</option>
                             <option value="Perempuan">Perempuan</option>
                         </select>
@@ -130,20 +137,31 @@
 
                 <div>
                     <label class="block text-sm font-semibold text-gray-600 mb-1">Tentang Saya</label>
-                    <textarea id="about_me" rows="4"
-                        class="w-full border border-gray-300 rounded-lg p-2.5 focus:ring-2 focus:ring-blue-500 outline-none"
-                        required></textarea>
+                    <textarea id="about_me" rows="3" class="w-full border border-gray-300 rounded-lg p-2.5 focus:ring-2 focus:ring-blue-500 outline-none" required></textarea>
+                </div>
+
+                <div>
+                    <label class="block text-sm font-semibold text-gray-600 mb-1">Pengalaman Kerja</label>
+                    <textarea id="experience" rows="3" class="w-full border border-gray-300 rounded-lg p-2.5 focus:ring-2 focus:ring-blue-500 outline-none" placeholder="Contoh:&#10;Network Engineer at Anita Komputer&#10;Okt 2024 - Sekarang"></textarea>
+                </div>
+
+                <div>
+                    <label class="block text-sm font-semibold text-gray-600 mb-1">Pendidikan</label>
+                    <textarea id="education" rows="3" class="w-full border border-gray-300 rounded-lg p-2.5 focus:ring-2 focus:ring-blue-500 outline-none" placeholder="Contoh:&#10;SMK Negeri 1 Ogan Komering Ulu&#10;Teknik Komputer (2021 - 2024)"></textarea>
+                </div>
+
+                <div>
+                    <label class="block text-sm font-semibold text-gray-600 mb-1">Skill & Keahlian</label>
+                    <textarea id="skills" rows="3" class="w-full border border-gray-300 rounded-lg p-2.5 focus:ring-2 focus:ring-blue-500 outline-none" placeholder="Contoh:&#10;- Mikrotik & Cisco&#10;- Network Monitoring&#10;- Keamanan Jaringan"></textarea>
                 </div>
 
                 <div>
                     <label class="block text-sm font-semibold text-gray-600 mb-1">Foto Profil</label>
-                    <input type="file" id="photoInput" accept="image/*"
-                        class="w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100">
+                    <input type="file" id="photoInput" accept="image/*" class="w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100">
                     <p class="text-xs text-gray-400 mt-1">Kosongkan jika tidak ingin mengubah foto</p>
                 </div>
 
-                <button type="submit" id="btnSimpan"
-                    class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-4 rounded-lg transition duration-200 mt-2 shadow-sm cursor-pointer">
+                <button type="submit" id="btnSimpan" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-4 rounded-lg transition duration-200 mt-2 shadow-sm cursor-pointer">
                     Simpan Perubahan
                 </button>
             </form>
@@ -153,7 +171,7 @@
     <script>
         const SUPABASE_URL = 'https://rxwpkmvzvhwsytrcotue.supabase.co';
         const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InJ4d3BrbXZ6dmh3c3l0cmNvdHVlIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzkyNTAwNDgsImV4cCI6MjA5NDgyNjA0OH0.LfoUlqusJ53BNCuzO5kdGAIHM5jFSrdTs4emBXQ0OlM';
-
+        
         const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
         // Referensi DOM
@@ -220,7 +238,7 @@
             cekStatusLogin();
         });
 
-        // Ambil Data Utama Profil
+        // Ambil Data Utama Profil & 3 Card
         async function loadProfilClient() {
             try {
                 const { data, error } = await supabaseClient
@@ -230,34 +248,43 @@
                     .single();
 
                 if (data) {
+                    // Update Konten Tampilan Luar
                     document.getElementById('display-name').innerText = data.name || 'Belum diatur';
                     document.getElementById('display-birthdate').innerText = formatTanggal(data.birth_date);
                     document.getElementById('display-gender').innerText = data.gender || '-';
                     document.getElementById('display-about').innerText = data.about_me || 'Belum ada deskripsi tentang saya.';
-
+                    
+                    // Isi data 3 card baru
+                    document.getElementById('display-experience').innerText = data.experience || 'Belum ada data pengalaman kerja.';
+                    document.getElementById('display-education').innerText = data.education || 'Belum ada data pendidikan.';
+                    document.getElementById('display-skills').innerText = data.skills || 'Belum ada data keahlian.';
+                    
                     if (data.photo_url) {
                         document.getElementById('display-photo').src = data.photo_url;
                     } else {
                         document.getElementById('display-photo').src = "https://api.dicebear.com/7.x/initials/svg?seed=" + encodeURIComponent(data.name || 'User');
                     }
 
-                    // Sinkronkan ke input edit form
+                    // Sinkronkan ke input field edit form modal
                     document.getElementById('name').value = data.name || '';
                     document.getElementById('birth_date').value = data.birth_date || '';
                     document.getElementById('gender').value = data.gender || 'Laki-laki';
                     document.getElementById('about_me').value = data.about_me || '';
+                    document.getElementById('experience').value = data.experience || '';
+                    document.getElementById('education').value = data.education || '';
+                    document.getElementById('skills').value = data.skills || '';
                 }
             } catch (err) {
                 console.error('Error load profil:', err);
             }
         }
 
-        window.onload = async function () {
+        window.onload = async function() {
             await loadProfilClient();
             await cekStatusLogin();
         };
 
-        // Simpan Perubahan Data CV
+        // Simpan Perubahan Seluruh Data CV
         document.getElementById('formCV').addEventListener('submit', async (e) => {
             e.preventDefault();
             btnSimpan.innerText = "Sedang Menyimpan...";
@@ -267,6 +294,9 @@
             const birthDate = document.getElementById('birth_date').value;
             const gender = document.getElementById('gender').value;
             const aboutMe = document.getElementById('about_me').value;
+            const experience = document.getElementById('experience').value;
+            const education = document.getElementById('education').value;
+            const skills = document.getElementById('skills').value;
             const photoFile = document.getElementById('photoInput').files[0];
 
             let photoUrl = null;
@@ -288,7 +318,17 @@
                 photoUrl = urlData.publicUrl;
             }
 
-            const dataData = { id: 1, name, birth_date: birthDate, gender, about_me: aboutMe };
+            // Gabungkan semua data teks untuk di-upsert ke baris ID = 1
+            const dataData = { 
+                id: 1, 
+                name, 
+                birth_date: birthDate, 
+                gender, 
+                about_me: aboutMe,
+                experience,
+                education,
+                skills
+            };
             if (photoUrl) dataData.photo_url = photoUrl;
 
             const { error: dbError } = await supabaseClient.from('profile').upsert(dataData);
@@ -306,5 +346,4 @@
         });
     </script>
 </body>
-
 </html>
