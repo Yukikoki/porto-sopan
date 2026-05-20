@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portofolio & CV Online</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
+<body class="bg-gray-100 min-h-screen text-gray-800 relative">
+
+    <div class="max-w-4xl mx-auto py-10 px-4">
+        
+        <div class="bg-white rounded-2xl shadow-sm p-6 md:p-8 border border-gray-100 mb-6">
+            <div class="flex flex-col md:flex-row items-center gap-6">
+                <div class="w-32 h-32 rounded-full overflow-hidden bg-gray-200 border-4 border-blue-500/20 flex-shrink-0 shadow-inner">
+                    <img id="display-photo" src="" alt="Foto Profil" class="w-full h-full object-cover">
+                </div>
+                
+                <div class="text-center md:text-left space-y-2 w-full">
+                    <h1 id="display-name" class="text-2xl md:text-3xl font-bold text-gray-900">Memuat nama...</h1>
+                    
+                    <div class="flex flex-wrap justify-center md:justify-start gap-4 text-sm text-gray-600 pt-1">
+                        <span class="flex items-center gap-1.5 bg-gray-50 px-3 py-1.5 rounded-lg border border-gray-100">
+                            <span id="display-birthdate">-</span>
+                        </span>
+                        <span class="flex items-center gap-1.5 bg-gray-50 px-3 py-1.5 rounded-lg border border-gray-100">
+                            <span id="display-gender">-</span>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="bg-white rounded-2xl shadow-sm p-6 md:p-8 border border-gray-100">
+            <h2 class="text-lg font-bold text-gray-900 border-b border-gray-100 pb-3 mb-4 flex items-center gap-2">
+                Tentang Saya
+            </h2>
+            <p id="display-about" class="text-gray-600 leading-relaxed whitespace-pre-line">
+                Sedang memuat informasi profil...
+            </p>
+        </div>
+    </div>
+
+    <button id="btnBukaEdit" class="fixed bottom-6 right-6 bg-gray-800 hover:bg-gray-950 text-white p-3 rounded-full shadow-lg transition duration-200 z-40 cursor-pointer">
+        ⚙️ Edit Profil
+    </button>
+
+    <div id="modalEdit" class="fixed inset-0 bg-black/50 backdrop-blur-sm hidden items-center justify-center p-4 z-50 animate-fade-in">
+        <div class="bg-white w-full max-w-lg p-6 rounded-2xl shadow-2xl border border-gray-100 max-h-[90vh] overflow-y-auto">
+            <div class="flex justify-between items-center mb-6">
+                <h2 class="text-xl font-bold text-gray-800">Kelola Data Profil</h2>
+                <button id="btnTutupEdit" class="text-gray-400 hover:text-gray-600 text-2xl cursor-pointer">&times;</button>
+            </div>
+            
+            <form id="formCV" class="space-y-4">
+                <div>
+                    <label class="block text-sm font-semibold text-gray-600 mb-1">Nama Lengkap</label>
+                    <input type="text" id="name" class="w-full border border-gray-300 rounded-lg p-2.5 focus:ring-2 focus:ring-blue-500 outline-none" required>
+                </div>
+
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-sm font-semibold text-gray-600 mb-1">Tanggal Lahir</label>
+                        <input type="date" id="birth_date" class="w-full border border-gray-300 rounded-lg p-2.5 focus:ring-2 focus:ring-blue-500 outline-none" required>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-semibold text-gray-600 mb-1">Jenis Kelamin</label>
+                        <select id="gender" class="w-full border border-gray-300 rounded-lg p-2.5 focus:ring-2 focus:ring-blue-500 outline-none" required>
+                            <option value="Laki-laki">Laki-laki</option>
+                            <option value="Perempuan">Perempuan</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div>
+                    <label class="block text-sm font-semibold text-gray-600 mb-1">Tentang Saya</label>
+                    <textarea id="about_me" rows="4" class="w-full border border-gray-300 rounded-lg p-2.5 focus:ring-2 focus:ring-blue-500 outline-none" required></textarea>
+                </div>
+
+                <div>
+                    <label class="block text-sm font-semibold text-gray-600 mb-1">Foto Profil</label>
+                    <input type="file" id="photoInput" accept="image/*" class="w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100">
+                    <p class="text-xs text-gray-400 mt-1">Kosongkan jika tidak ingin mengubah foto</p>
+                </div>
+
+                <button type="submit" id="btnSimpan" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-4 rounded-lg transition duration-200 mt-2 shadow-sm cursor-pointer">
+                    Simpan Perubahan
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        const SUPABASE_URL = 'https://rxwpkmvzvhwsytrcotue.supabase.co';
+        const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InJ4d3BrbXZ6dmh3c3l0cmNvdHVlIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzkyNTAwNDgsImV4cCI6MjA5NDgyNjA0OH0.LfoUlqusJ53BNCuzO5kdGAIHM5jFSrdTs4emBXQ0OlM';
+        
+        const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+
+        // Elemen-elemen DOM Tampilan
+        const modal = document.getElementById('modalEdit');
+        const form = document.getElementById('formCV');
+        const btnSimpan = document.getElementById('btnSimpan');
+
+        // Buka - Tutup Modal Pop-up
+        document.getElementById('btnBukaEdit').addEventListener('click', () => modal.classList.replace('hidden', 'flex'));
+        document.getElementById('btnTutupEdit').addEventListener('click', () => modal.classList.replace('flex', 'hidden'));
+
+        function formatTanggal(stringTanggal) {
+            if (!stringTanggal) return '-';
+            const opsi = { year: 'numeric', month: 'long', day: 'numeric' };
+            return new Date(stringTanggal).toLocaleDateString('id-ID', opsi);
+        }
+
+        // 1. FUNGSI LOAD DATA UTAMA (Dipanggil saat web dibuka & setelah simpan data)
+        async function loadProfilClient() {
+            try {
+                const { data, error } = await supabaseClient
+                    .from('profile')
+                    .select('*')
+                    .eq('id', 1)
+                    .single();
+
+                if (data) {
+                    // Update ke tampilan depan (HRD)
+                    document.getElementById('display-name').innerText = data.name || 'Belum diatur';
+                    document.getElementById('display-birthdate').innerText = formatTanggal(data.birth_date);
+                    document.getElementById('display-gender').innerText = data.gender || '-';
+                    document.getElementById('display-about').innerText = data.about_me || 'Belum ada deskripsi tentang saya.';
+                    
+                    if (data.photo_url) {
+                        document.getElementById('display-photo').src = data.photo_url;
+                    } else {
+                        document.getElementById('display-photo').src = "https://api.dicebear.com/7.x/initials/svg?seed=" + encodeURIComponent(data.name || 'User');
+                    }
+
+                    // Isi juga nilai inputan form modal biar sinkron saat dibuka
+                    document.getElementById('name').value = data.name || '';
+                    document.getElementById('birth_date').value = data.birth_date || '';
+                    document.getElementById('gender').value = data.gender || 'Laki-laki';
+                    document.getElementById('about_me').value = data.about_me || '';
+                }
+            } catch (err) {
+                console.error('Terjadi eror sistem:', err);
+            }
+        }
+
+        // Jalankan load data otomatis di awal
+        window.onload = loadProfilClient;
+
+        // 2. PROSES UPDATE DATA SAAT FORM DI-SUBMIT
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            btnSimpan.innerText = "Sedang Menyimpan...";
+            btnSimpan.disabled = true;
+
+            const name = document.getElementById('name').value;
+            const birthDate = document.getElementById('birth_date').value;
+            const gender = document.getElementById('gender').value;
+            const aboutMe = document.getElementById('about_me').value;
+            const photoFile = document.getElementById('photoInput').files[0];
+
+            let photoUrl = null;
+
+            // Proses upload foto jika ada file baru
+            if (photoFile) {
+                const namaFile = `${Date.now()}_${photoFile.name}`;
+                const { data: uploadData, error: uploadError } = await supabaseClient.storage
+                    .from('photos')
+                    .upload(namaFile, photoFile);
+
+                if (uploadError) {
+                    alert('Gagal upload foto: ' + uploadError.message);
+                    btnSimpan.innerText = "Simpan Perubahan";
+                    btnSimpan.disabled = false;
+                    return;
+                }
+
+                const { data: urlData } = supabaseClient.storage.from('photos').getPublicUrl(namaFile);
+                photoUrl = urlData.publicUrl;
+            }
+
+            const dataData = {
+                id: 1,
+                name: name,
+                birth_date: birthDate,
+                gender: gender,
+                about_me: aboutMe
+            };
+
+            if (photoUrl) dataData.photo_url = photoUrl;
+
+            // Simpan ke Supabase
+            const { error: dbError } = await supabaseClient.from('profile').upsert(dataData);
+
+            if (dbError) {
+                alert('Gagal menyimpan data ke database: ' + dbError.message);
+            } else {
+                alert('Yey! Data profil berhasil diperbarui! 🎉');
+                modal.classList.replace('flex', 'hidden'); // Tutup pop-up otomatis
+                loadProfilClient(); // Refresh data tampilan depan tanpa reload browser
+            }
+
+            btnSimpan.innerText = "Simpan Perubahan";
+            btnSimpan.disabled = false;
+        });
+    </script>
+</body>
+</html>
