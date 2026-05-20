@@ -9,10 +9,8 @@
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <style>
         body {
-            /* FIX: Memanggil gambar dari dalam folder assets */
             background-image: url('img/bg-oter.png');
 
-            /* Mengatur pola ubin/grid agar tersusun rapi */
             background-size: 140px 140px;
             background-repeat: repeat;
             background-attachment: fixed;
@@ -22,12 +20,10 @@
             content: "";
             position: fixed;
             inset: 0;
-            /* Lapisan putih transparan 85% agar teks CV kontras dan mudah dibaca */
             background-color: rgba(243, 244, 246, 0.85);
             z-index: -1;
         }
 
-        /* Menghilangkan scrollbar kaku di modal edit profil */
         .scrollbar-hide::-webkit-scrollbar {
             display: none !important;
             width: 0 !important;
