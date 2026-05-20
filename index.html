@@ -6,10 +6,31 @@
     <title>Portofolio & CV Online</title>
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-</head>
-<body class="bg-gray-100 min-h-screen text-gray-800 relative">
+    <style>
+        body {
+            /* 1. Pasang Gambar Berang-berang */
+            background-image: url('https://replicate.delivery/pbxt/JRrX77Zg1WvH9pL7S4rT54zM7JmPzM7JmPzM7JmPzM7JmPzM7J/output.png');
+            
+            /* 2. Pengaturan Background agar Penuh dan Tetap di Tempat */
+            background-size: cover;          /* Gambar menutupi seluruh layar */
+            background-position: center;     /* Gambar rata tengah */
+            background-repeat: no-repeat;    /* Gambar tidak mengulang */
+            background-attachment: fixed;    /* Gambar tetap saat di-scroll */
+        }
 
-    <div id="adminNavbar" class="bg-gray-900 text-white px-6 py-3 hidden justify-between items-center shadow-md">
+        /* 3. Menambahkan Lapisan Putih Samar di Atas Gambar */
+        body::before {
+            content: "";
+            position: fixed;
+            inset: 0;
+            background-color: rgba(255, 255, 255, 0.9); /* Putih samar (90% transparan) */
+            z-index: -1; /* Berada di bawah konten utama */
+        }
+    </style>
+</head>
+<body class="min-h-screen text-gray-800 relative font-sans">
+
+    <div id="adminNavbar" class="bg-gray-900/90 backdrop-blur-sm text-white px-6 py-3 hidden justify-between items-center shadow-md">
         <span class="text-sm font-medium text-gray-300">Mode Admin Aktif</span>
         <button id="btnLogout" class="bg-red-600 hover:bg-red-700 text-white text-xs font-bold py-1.5 px-4 rounded-lg transition cursor-pointer">
             Logout
@@ -18,20 +39,20 @@
 
     <div class="max-w-4xl mx-auto py-10 px-4 space-y-6">
         
-        <div class="bg-white rounded-2xl shadow-sm p-6 md:p-8 border border-gray-100">
+        <div class="bg-white/80 backdrop-blur-sm rounded-2xl shadow-lg p-6 md:p-8 border border-gray-100">
             <div class="flex flex-col md:flex-row items-center gap-6">
                 <div class="w-32 h-32 rounded-full overflow-hidden bg-gray-200 border-4 border-blue-500/20 flex-shrink-0 shadow-inner">
                     <img id="display-photo" src="" alt="Foto Profil" class="w-full h-full object-cover">
                 </div>
                 
                 <div class="text-center md:text-left space-y-2 w-full">
-                    <h1 id="display-name" class="text-2xl md:text-3xl font-bold text-gray-900">Memuat nama...</h1>
+                    <h1 id="display-name" class="text-2xl md:text-3xl font-bold text-gray-900 Memuat nama...</h1>
                     
                     <div class="flex flex-wrap justify-center md:justify-start gap-4 text-sm text-gray-600 pt-1">
-                        <span class="flex items-center gap-1.5 bg-gray-50 px-3 py-1.5 rounded-lg border border-gray-100">
+                        <span class="flex items-center gap-1.5 bg-white px-3 py-1.5 rounded-lg border border-gray-100">
                             Tanggal Lahir: <span id="display-birthdate">-</span>
                         </span>
-                        <span class="flex items-center gap-1.5 bg-gray-50 px-3 py-1.5 rounded-lg border border-gray-100">
+                        <span class="flex items-center gap-1.5 bg-white px-3 py-1.5 rounded-lg border border-gray-100">
                             Jenis Kelamin: <span id="display-gender">-</span>
                         </span>
                     </div>
@@ -39,7 +60,7 @@
             </div>
         </div>
 
-        <div class="bg-white rounded-2xl shadow-sm p-6 md:p-8 border border-gray-100">
+        <div class="bg-white/80 backdrop-blur-sm rounded-2xl shadow-lg p-6 md:p-8 border border-gray-100 overflow-hidden">
             <h2 class="text-lg font-bold text-gray-900 border-b border-gray-100 pb-3 mb-4">
                 Tentang Saya
             </h2>
@@ -49,7 +70,7 @@
         </div>
 
         <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <div class="bg-white rounded-2xl shadow-sm p-6 border border-gray-100 flex flex-col">
+            <div class="bg-white/80 backdrop-blur-sm rounded-2xl shadow-lg p-6 border border-gray-100 flex flex-col">
                 <h2 class="text-lg font-bold text-gray-900 border-b border-gray-100 pb-3 mb-4">
                     Pengalaman Kerja
                 </h2>
@@ -58,7 +79,7 @@
                 </p>
             </div>
 
-            <div class="bg-white rounded-2xl shadow-sm p-6 border border-gray-100 flex flex-col">
+            <div class="bg-white/80 backdrop-blur-sm rounded-2xl shadow-lg p-6 border border-gray-100 flex flex-col">
                 <h2 class="text-lg font-bold text-gray-900 border-b border-gray-100 pb-3 mb-4">
                     Pendidikan
                 </h2>
@@ -67,7 +88,7 @@
                 </p>
             </div>
 
-            <div class="bg-white rounded-2xl shadow-sm p-6 border border-gray-100 flex flex-col">
+            <div class="bg-white/80 backdrop-blur-sm rounded-2xl shadow-lg p-6 border border-gray-100 flex flex-col">
                 <h2 class="text-lg font-bold text-gray-900 border-b border-gray-100 pb-3 mb-4">
                     Skill & Keahlian
                 </h2>
@@ -89,7 +110,7 @@
     <div id="modalLogin" class="fixed inset-0 bg-black/50 backdrop-blur-sm hidden items-center justify-center p-4 z-50">
         <div class="bg-white w-full max-w-sm p-6 rounded-2xl shadow-2xl border border-gray-100">
             <div class="flex justify-between items-center mb-4">
-                <h2 class="text-lg font-bold text-gray-800">Login Pemilik Portofolio</h2>
+                <h2 class="text-lg font-bold text-gray-800">Login Admin</h2>
                 <button id="btnTutupLogin" class="text-gray-400 hover:text-gray-600 text-2xl cursor-pointer">&times;</button>
             </div>
             <form id="formLogin" class="space-y-4">
@@ -108,22 +129,10 @@
         </div>
     </div>
 
-    <style>
-        .scrollbar-hide::-webkit-scrollbar {
-            display: none !important;
-            width: 0 !important;
-            height: 0 !important;
-        }
-        .scrollbar-hide {
-            -ms-overflow-style: none !important;  
-            scrollbar-width: none !important;  
-        }
-    </style>
-
     <div id="modalEdit" class="fixed inset-0 bg-black/50 backdrop-blur-sm hidden items-center justify-center p-4 z-50">
-        <div class="bg-white w-full max-w-lg p-6 rounded-2xl shadow-2xl border border-gray-100 max-h-[90vh] overflow-y-auto scrollbar-hide">
+        <div class="bg-white w-full max-w-lg p-6 rounded-2xl shadow-2xl border border-gray-100 max-h-[90vh] overflow-y-auto">
             <div class="flex justify-between items-center mb-6">
-                <h2 class="text-xl font-bold text-gray-800">Kelola Data Profil</h2>
+                <h2 class="text-xl font-bold text-gray-800">Edit Data CV</h2>
                 <button id="btnTutupEdit" class="text-gray-400 hover:text-gray-600 text-2xl cursor-pointer">&times;</button>
             </div>
             
@@ -154,17 +163,17 @@
 
                 <div>
                     <label class="block text-sm font-semibold text-gray-600 mb-1">Pengalaman Kerja</label>
-                    <textarea id="experience" rows="3" class="w-full border border-gray-300 rounded-lg p-2.5 focus:ring-2 focus:ring-blue-500 outline-none" placeholder="Contoh:&#10;Network Engineer at Anita Komputer&#10;Okt 2024 - Sekarang"></textarea>
+                    <textarea id="experience" rows="3" class="w-full border border-gray-300 rounded-lg p-2.5 focus:ring-2 focus:ring-blue-500 outline-none"></textarea>
                 </div>
 
                 <div>
                     <label class="block text-sm font-semibold text-gray-600 mb-1">Pendidikan</label>
-                    <textarea id="education" rows="3" class="w-full border border-gray-300 rounded-lg p-2.5 focus:ring-2 focus:ring-blue-500 outline-none" placeholder="Contoh:&#10;SMK Negeri 1 Ogan Komering Ulu&#10;Teknik Komputer (2021 - 2024)"></textarea>
+                    <textarea id="education" rows="3" class="w-full border border-gray-300 rounded-lg p-2.5 focus:ring-2 focus:ring-blue-500 outline-none"></textarea>
                 </div>
 
                 <div>
                     <label class="block text-sm font-semibold text-gray-600 mb-1">Skill & Keahlian</label>
-                    <textarea id="skills" rows="3" class="w-full border border-gray-300 rounded-lg p-2.5 focus:ring-2 focus:ring-blue-500 outline-none" placeholder="Contoh:&#10;- Mikrotik & Cisco&#10;- Network Monitoring&#10;- Keamanan Jaringan"></textarea>
+                    <textarea id="skills" rows="3" class="w-full border border-gray-300 rounded-lg p-2.5 focus:ring-2 focus:ring-blue-500 outline-none"></textarea>
                 </div>
 
                 <div>
@@ -181,6 +190,7 @@
     </div>
 
     <script>
+        // ... (Logika Javascript sama persis dengan kode sebelumnya) ...
         const SUPABASE_URL = 'https://rxwpkmvzvhwsytrcotue.supabase.co';
         const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InJ4d3BrbXZ6dmh3c3l0cmNvdHVlIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzkyNTAwNDgsImV4cCI6MjA5NDgyNjA0OH0.LfoUlqusJ53BNCuzO5kdGAIHM5jFSrdTs4emBXQ0OlM';
         
@@ -194,7 +204,7 @@
         const btnBukaLogin = document.getElementById('btnBukaLogin');
         const btnSimpan = document.getElementById('btnSimpan');
 
-        // Navigasi Tombol Pop-up
+        // Navigasi Tombol
         btnBukaLogin.addEventListener('click', () => modalLogin.classList.replace('hidden', 'flex'));
         document.getElementById('btnTutupLogin').addEventListener('click', () => modalLogin.classList.replace('flex', 'hidden'));
         btnBukaEdit.addEventListener('click', () => modalEdit.classList.replace('hidden', 'flex'));
@@ -207,7 +217,7 @@
             return new Date(stringTanggal).toLocaleDateString('id-ID', opsi);
         }
 
-        // Cek Status Sesi Login
+        // Cek Status Login
         async function cekStatusLogin() {
             const { data: { session } } = await supabaseClient.auth.getSession();
             if (session) {
@@ -235,7 +245,7 @@
             if (error) {
                 alert('Login Gagal: ' + error.message);
             } else {
-                alert('Berhasil masuk sebagai admin.');
+                alert('Berhasil masuk.');
                 modalLogin.classList.replace('flex', 'hidden');
                 formLogin.reset();
                 cekStatusLogin();
@@ -246,11 +256,11 @@
         // Proses Logout
         document.getElementById('btnLogout').addEventListener('click', async () => {
             await supabaseClient.auth.signOut();
-            alert('Berhasil keluar dari mode admin.');
+            alert('Berhasil keluar.');
             cekStatusLogin();
         });
 
-        // Ambil Data Utama Profil & 3 Card
+        // Ambil Data Profil
         async function loadProfilClient() {
             try {
                 const { data, error } = await supabaseClient
@@ -264,10 +274,9 @@
                     document.getElementById('display-name').innerText = data.name || 'Belum diatur';
                     document.getElementById('display-birthdate').innerText = formatTanggal(data.birth_date);
                     document.getElementById('display-gender').innerText = data.gender || '-';
-                    document.getElementById('display-about').innerText = data.about_me || 'Belum ada deskripsi tentang saya.';
+                    document.getElementById('display-about').innerText = data.about_me || 'Belum ada deskripsi.';
                     
-                    // Isi data 3 card baru
-                    document.getElementById('display-experience').innerText = data.experience || 'Belum ada data pengalaman kerja.';
+                    document.getElementById('display-experience').innerText = data.experience || 'Belum ada data pengalaman.';
                     document.getElementById('display-education').innerText = data.education || 'Belum ada data pendidikan.';
                     document.getElementById('display-skills').innerText = data.skills || 'Belum ada data keahlian.';
                     
@@ -277,7 +286,7 @@
                         document.getElementById('display-photo').src = "https://api.dicebear.com/7.x/initials/svg?seed=" + encodeURIComponent(data.name || 'User');
                     }
 
-                    // Sinkronkan ke input field edit form modal
+                    // Sinkronkan ke input form
                     document.getElementById('name').value = data.name || '';
                     document.getElementById('birth_date').value = data.birth_date || '';
                     document.getElementById('gender').value = data.gender || 'Laki-laki';
@@ -287,7 +296,7 @@
                     document.getElementById('skills').value = data.skills || '';
                 }
             } catch (err) {
-                console.error('Error load profil:', err);
+                console.error('Error:', err);
             }
         }
 
@@ -296,10 +305,10 @@
             await cekStatusLogin();
         };
 
-        // Simpan Perubahan Seluruh Data CV
+        // Simpan Perubahan
         document.getElementById('formCV').addEventListener('submit', async (e) => {
             e.preventDefault();
-            btnSimpan.innerText = "Sedang Menyimpan...";
+            btnSimpan.innerText = "Menyimpan...";
             btnSimpan.disabled = true;
 
             const name = document.getElementById('name').value;
@@ -320,8 +329,8 @@
                     .upload(namaFile, photoFile);
 
                 if (uploadError) {
-                    alert('Gagal upload foto: ' + uploadError.message);
-                    btnSimpan.innerText = "Simpan Perubahan";
+                    alert('Gagal upload: ' + uploadError.message);
+                    btnSimpan.innerText = "Simpan";
                     btnSimpan.disabled = false;
                     return;
                 }
@@ -330,30 +339,23 @@
                 photoUrl = urlData.publicUrl;
             }
 
-            // Gabungkan semua data teks untuk di-upsert ke baris ID = 1
             const dataData = { 
-                id: 1, 
-                name, 
-                birth_date: birthDate, 
-                gender, 
-                about_me: aboutMe,
-                experience,
-                education,
-                skills
+                id: 1, name, birth_date: birthDate, gender, about_me: aboutMe,
+                experience, education, skills
             };
             if (photoUrl) dataData.photo_url = photoUrl;
 
             const { error: dbError } = await supabaseClient.from('profile').upsert(dataData);
 
             if (dbError) {
-                alert('Gagal menyimpan data: ' + dbError.message);
+                alert('Gagal menyimpan: ' + dbError.message);
             } else {
-                alert('Portofolio berhasil diperbarui.');
+                alert('Berhasil diperbarui.');
                 modalEdit.classList.replace('flex', 'hidden');
                 loadProfilClient();
             }
 
-            btnSimpan.innerText = "Simpan Perubahan";
+            btnSimpan.innerText = "Simpan";
             btnSimpan.disabled = false;
         });
     </script>
